@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import {
+    createUserWithEmailAndPassword,
     GithubAuthProvider,
     GoogleAuthProvider,
     onAuthStateChanged,
+    signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
+    signOut,
+    updateProfile
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 
@@ -16,14 +19,30 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     // sign in user  with google
-    const signInWihtGoogle = () => {
+    const signInWithGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider)
     }
-    // sign in user github
+    // sign in with user github
     const signInWithGithub = () => {
         setLoading(true)
         return signInWithPopup(auth, githubProvider);
+    }
+    // createUserWithEmailPassword
+    const createUserWithEmailPassword = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
+    }
+    // signInWithEmailPassword
+    const signInWithEmailPassword = (email, password) =>{
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+    // update profile
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
     }
     // logout user
     const signOutUser = () => {
@@ -42,12 +61,16 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
     const authInfo = {
-        signInWihtGoogle,
+        signInWithGoogle,
         user,
+        setUser,
         loading,
         signInWithGithub,
         signInWithGithub,
         signOutUser,
+        createUserWithEmailPassword,
+        signInWithEmailPassword,
+        updateUserProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>

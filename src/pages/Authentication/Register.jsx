@@ -3,17 +3,28 @@ import bgImg from '../../assets/images/register.jpg'
 import logo from '../../assets/images/logo.png'
 import useAuth from '../../provider/useAuth'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
+import { GoEye } from "react-icons/go";
+import { GoEyeClosed } from "react-icons/go";
 
 const Registration = () => {
-  const { signInWihtGoogle, signInWithGithub } = useAuth();
+  const {
+    signInWithGoogle,
+    signInWithGithub,
+    createUserWithEmailPassword,
+    updateUserProfile,
+    setUser } = useAuth();
+  // state
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(false);
   // handle google login
   const handleGoogleSignIn = () => {
-    signInWihtGoogle()
+    signInWithGoogle()
       .then(() => {
-        toast.success('Sign in Successful.')
+        toast.success('Registration Successful.')
       })
       .catch(error => {
-        console.log(error);
+        toast.error(error.message)
       })
   }
 
@@ -21,11 +32,50 @@ const Registration = () => {
   const handleGithibSignIn = () => {
     signInWithGithub()
       .then(() => {
-        toast.success('Sign in Successful.')
+        toast.success('Registration Successful.')
       })
       .catch(error => {
-        console.log(error);
+        toast.error(error.message)
       })
+  }
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // password validation
+    setError(false)
+    if (!/[A-Z]/.test(password)) {
+      setError(true);
+      toast.error("Password must include at least one uppercase letter (A-Z)");
+      return
+    } else if (!/[a-z]/.test(password)) {
+      setError(true);
+      toast.error("Password must include at least one lowercase letter (a-z)");
+      return
+    } else if (password.length < 6) {
+      setError(true);
+      toast.error('Password must be 6 characters or longor')
+      return
+    } else {
+      setError(true)
+    }
+
+    // create user
+    try {
+      const result = await createUserWithEmailPassword(email, password);
+      await updateUserProfile(name, photo);
+      setUser({ ...result.user, displayName: name, photoURL: photo });
+      toast.success('Register Successful.')
+    }
+    catch (error) {
+      toast.error(error.message);
+      console.log(error.message);
+    }
   }
 
   return (
@@ -87,20 +137,21 @@ const Registration = () => {
 
             <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
           </div>
-          <form>
+
+          <form onSubmit={handleRegister}>
             <div className='mt-4'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-600 '
-                htmlFor='name'
-              >
-                Username
+                htmlFor='name'> Name
               </label>
               <input
                 id='name'
                 autoComplete='name'
                 name='name'
-                className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-blue-300'
+                className={`block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-blue-300`}
                 type='text'
+                placeholder='Name'
+                required
               />
             </div>
             <div className='mt-4'>
@@ -116,6 +167,8 @@ const Registration = () => {
                 name='photo'
                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-blue-300'
                 type='text'
+                placeholder='Photo URL'
+                required
               />
             </div>
             <div className='mt-4'>
@@ -131,26 +184,35 @@ const Registration = () => {
                 name='email'
                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-blue-300'
                 type='email'
+                placeholder='Email Address'
+                required
               />
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-4 relative'>
               <div className='flex justify-between'>
                 <label
-                  className='block mb-2 text-sm font-medium text-gray-600 '
-                  htmlFor='loggingPassword'
-                >
+                  className='block mb-2 text-sm font-medium text-gray-600' htmlFor='loggingPassword'>
                   Password
                 </label>
               </div>
-
               <input
                 id='loggingPassword'
                 autoComplete='current-password'
                 name='password'
-                className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10 focus:outline-none focus:ring focus:ring-blue-300'
-                type='password'
+                className={`block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-opacity-10 focus:outline-none focus:ring focus:ring-blue-300`}
+                type={showPassword ? 'text' : 'password'}
+                placeholder='Password'
               />
+              <div onClick={() => setShowPassword(!showPassword)} className='absolute right-3 bottom-[7.5px]'>
+                <div
+                  type='submit'
+                  className='cursor-pointer w-full px-2.5 py-1.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10'>
+                  {
+                    showPassword ? <GoEye /> : <GoEyeClosed />
+                  }
+                </div>
+              </div>
             </div>
             <div className='mt-5'>
               <button
