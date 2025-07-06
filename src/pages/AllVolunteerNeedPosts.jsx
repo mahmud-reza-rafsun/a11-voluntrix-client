@@ -4,23 +4,25 @@ import VolunteerPostCard from "../components/VolunteerPostCard";
 
 const AllVolunteerNeedPosts = () => {
     const [volunteer, setVolunteer] = useState([]);
+    const [search, setSearch] = useState('');
         useEffect(() => {
             fetchAllData();
-        }, [])
+        }, [search])
         const fetchAllData = async () => {
             try {
-                const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer`);
+                const { data } = await axios.get(`${import.meta.env.VITE_API}/all-volunteer?search=${search}`);
                 setVolunteer(data)
             } catch (error) {
                 console.log(error);
             }
         }
-        console.log(volunteer);
+        console.log(search);
     return (
         <div>
             <div className='flex flex-col md:flex-row justify-center items-center gap-5'>
                 <div className='flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-30 focus-within:border-gray-400 focus-within:ring-gray-400'>
                     <input
+                    onChange={(e) => setSearch(e.target.value)}
                         className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-base-100 outline-none focus:placeholder-transparent'
                         type='text'
                         name='search'

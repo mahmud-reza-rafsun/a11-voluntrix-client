@@ -11,52 +11,65 @@ import ManageMyPost from "../pages/ManageMyPost";
 import UpdateVolunteer from "../components/UpdateVolunteer";
 import MyVolunteerRequest from "../pages/MyVolunteerRequest";
 import ErrorPage from "../pages/ErrorPage";
+import PrivetRouter from "./PrivetRouter";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root/>,
-        errorElement: <ErrorPage/>,
+        element: <Root />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: '/login',
-                element: <Login/>
+                element: <Login />
             },
             {
                 path: '/registration',
-                element: <Registration/>
+                element: <Registration />
             },
             {
                 path: '/add-volunteer',
-                element: <AddVolunteer/>
+                element: <PrivetRouter>
+                    <AddVolunteer />
+                </PrivetRouter>
             },
             {
-                path: '/all-volunteer-peed-posts',
-                element: <AllVolunteerNeedPosts/>
+                path: '/all-volunteer-need-posts',
+                element: <AllVolunteerNeedPosts />
             },
             {
-                path :'/details/:id',
-                element: <VolunteerDetails/>
+                path: '/details/:id',
+                element: <PrivetRouter>
+                    <VolunteerDetails />
+                </PrivetRouter>
             },
             {
                 path: '/be-a-volunteer/:id',
-                element: <BeAVolunteer/>
+                element: <PrivetRouter>
+                    <BeAVolunteer />
+                </PrivetRouter>
             },
             {
                 path: '/manage-my-post',
-                element: <ManageMyPost/>
+                element: <PrivetRouter>
+                    <ManageMyPost />
+                </PrivetRouter>
             },
             {
                 path: '/update-volunteer/:id',
-                element: <UpdateVolunteer/>
+                element: <PrivetRouter>
+                    <UpdateVolunteer />
+                </PrivetRouter>
             },
             {
                 path: '/my-volunteer-request',
-                element: <MyVolunteerRequest/>
+                element: <PrivetRouter>
+                    <MyVolunteerRequest />
+                </PrivetRouter>
             }
         ]
     }

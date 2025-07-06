@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/images/logo.png'
-import useAuth from "../provider/useAuth";
 import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-    const { user, signOutUser } = useAuth();
+    const { user, signOutUser } = useContext(AuthContext)
 
     const handleSignOut = () => {
         signOutUser()
@@ -19,7 +20,7 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/all-volunteer-peed-posts'>All Volunteer Need Posts</NavLink></li>
+        <li><NavLink to='/all-volunteer-need-posts'>All Volunteer Need Posts</NavLink></li>
     </>
     return (
         <div className='bg-base-100 shadow-lg sticky top-0 z-50'>
@@ -50,9 +51,13 @@ const Navbar = () => {
                                     <ul
                                         tabIndex={0}
                                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                        <li><Link to="/add-volunteer">Add Volunteer need Post</Link></li>
-                                        <li><Link to="/manage-my-post">Manage My Posts</Link></li>
-                                        <li><Link to="/my-volunteer-request">My Volunteer Request</Link></li>
+                                        {
+                                            user && <>
+                                                <li><Link to="/add-volunteer">Add Volunteer need Post</Link></li>
+                                                <li><Link to="/manage-my-post">Manage My Posts</Link></li>
+                                                <li><Link to="/my-volunteer-request">My Volunteer Request</Link></li>
+                                            </>
+                                        }
                                     </ul>
                                 </div>
                                 <div>

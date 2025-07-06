@@ -17,7 +17,7 @@ const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     // sign in user  with google
     const signInWithGoogle = () => {
         setLoading(true);
@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            setLoading(true);
+            setLoading(false);
             console.log(currentUser);
         })
         return () => {

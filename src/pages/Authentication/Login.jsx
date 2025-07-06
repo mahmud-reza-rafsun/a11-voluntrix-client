@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/images/login.jpg'
 import logo from '../../assets/images/logo.png'
 import useAuth from '../../provider/useAuth';
@@ -11,15 +11,18 @@ const Login = () => {
     signInWithGoogle,
     signInWithGithub,
     signInWithEmailPassword } = useAuth();
-    
+
   // state
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/'
 
   // handle google login
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(() => {
+        navigate(from, { replace: true });
         toast.success('Sign in Successful.')
       })
       .catch(error => {
@@ -32,40 +35,35 @@ const Login = () => {
     signInWithGithub()
       .then(() => {
         toast.success('Sign in Successful.')
+        navigate(from, { replace: true });
       })
       .catch(error => {
         toast.error(error.message)
       })
   }
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
     // password validation
-    setError(false)
     if (!/[A-Z]/.test(password)) {
-      setError(true);
       toast.error("Password must include at least one uppercase letter (A-Z)");
       return
     } else if (!/[a-z]/.test(password)) {
-      setError(true);
       toast.error("Password must include at least one lowercase letter (a-z)");
       return
     } else if (password.length < 6) {
-      setError(true);
       toast.error('Password must be 6 characters or longor')
       return
-    } else {
-      setError(true)
     }
-
     // singIn user
-    try{
-      signInWithEmailPassword(email, password)
+    try {
+      await signInWithEmailPassword(email, password)
+      navigate(from, { replace: true });
       toast.success('Sign In Successful.')
-    }catch(error){
+    } catch (error) {
       toast.error(error.message)
     }
 
