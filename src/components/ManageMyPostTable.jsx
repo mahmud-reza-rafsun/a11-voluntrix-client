@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
-const ManageMyPostTable = ({ volutrix }) => {
+const ManageMyPostTable = ({ volutrix, handleDeleteVolunteer }) => {
     const { _id, title, category, description, deadline, volunteers } = volutrix || {};
     return (
         <tr>
@@ -32,7 +32,7 @@ const ManageMyPostTable = ({ volutrix }) => {
             </td>
             <td className='px-4 py-4 text-sm whitespace-nowrap'>
                 <div className='flex items-center gap-x-6'>
-                    <button className='text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none'>
+                    <button onClick={() => handleDeleteVolunteer(_id)} className='text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'

@@ -11,14 +11,45 @@ const ManageMyPost = () => {
         fetchAllData();
     }, [user])
     const fetchAllData = async () => {
-       if(user?.email){
-         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer/${user?.email}`);
-            setVolunteer(data)
+        if (user?.email) {
+            try {
+                const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer/${user?.email}`);
+                setVolunteer(data)
+            } catch (error) {
+                toast.error(error.message);
+            }
+        }
+    }
+    // handleDelete
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`${import.meta.env.VITE_API}/delete-volunteer/${id}`);
+            toast.success('Delete Post');
+            fetchAllData();
         } catch (error) {
             toast.error(error.message);
         }
-       }
+    }
+    // handle delete volunteer
+    const handleDeleteVolunteer = (id) => {
+        toast((d) => (
+            <div className="text-center space-y-2">
+                <div>
+                    <p>Are you <b>Sure</b> !!!</p>
+                </div>
+                <div className="flex gap-4">
+                    <button onClick={() => {
+                        toast.dismiss(d.id)
+                        handleDelete(id)
+                    }}
+                        className="btn-sm bg-red-400 text-white font-semibold rounded-md">Delete
+                    </button>
+                    <button onClick={() => toast.dismiss(d.id)}
+                        className="btn-sm bg-indigo-400 text-white font-semibold rounded-md"> Close
+                    </button>
+                </div>
+            </div>
+        ))
     }
     console.log(volunteer);
     return (
@@ -84,7 +115,7 @@ const ManageMyPost = () => {
                                 <tbody className='bg-white divide-y divide-gray-200 '>
                                     {/* load dynamic data */}
                                     {
-                                        volunteer.length > 0 ? volunteer.map((volutrix) => <ManageMyPostTable key={volutrix?._id} volutrix={volutrix} />) : <tr><td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
+                                        volunteer.length > 0 ? volunteer.map((volutrix) => <ManageMyPostTable key={volutrix?._id} volutrix={volutrix} handleDeleteVolunteer={handleDeleteVolunteer} />) : <tr><td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
                                             No Post Found
                                         </td></tr>
                                     }

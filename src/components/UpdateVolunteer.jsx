@@ -11,7 +11,7 @@ const UpdateVolunteer = () => {
     const { user } = useAuth();
     const {id} = useParams();
     const [startDate, setStartDate] = useState(new Date())
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [volunteer, setVolunteer] = useState([]);
     useEffect(() => {
         fetchAllData();
@@ -24,21 +24,28 @@ const UpdateVolunteer = () => {
             toast.error(error.message);
         }
     }
-    console.log(volunteer);
 
     const handleUpdate = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+        
+        const form = e.target;
+        const title = form.title.value;
+        const category = form.category.value;
+        const deadline = startDate;
+        const volunteers = form.volunteers.value;
+        const description = form.description.value;
+        const updateData = { title, category, deadline, volunteers, description };
+        console.table(updateData);
 
-        // try {
-        //     const {data} = axios.put(`${import.meta.env.VITE_API}/....`);
-        //     toast.success('Add Post Successful.')
-        //     // navigate('/');
-        //     console.log(data);
-        // } catch (error) {
-        //     console.log(error);
-        //     toast.error(error.message);
-        // }
-
+        try {
+            const {data} = axios.put(`${import.meta.env.VITE_API}/update-volunteer/${id}`, updateData);
+            toast.success('Update Successful.')
+            navigate('/manage-my-post');
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
     }
     return (
         <div className="shadow-xl max-w-lg mx-auto p-5 mt-4">

@@ -28,7 +28,7 @@ const AddVolunteer = () => {
         try {
             axios.post(`${import.meta.env.VITE_API}/add-volunteer`, postData);
             toast.success('Add Post Successful.')
-            navigate('/');
+            navigate('/manage-my-post');
         } catch (error) {
             console.log(error);
             toast.error(error.message);
