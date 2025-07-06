@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import useAuth from "../provider/useAuth";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from "date-fns";
+import toast from "react-hot-toast";
 
 const BeAVolunteer = () => {
     const { user } = useAuth();
@@ -27,16 +28,16 @@ const BeAVolunteer = () => {
         const thumbnail = form.thumbnail.value;
         const category = form.category.value;
         const email = form.email.value;
-        const deadline = startDate;
+        const deadline = form.deadline.value;
         const location = form.location.value;
         const volunteers = form.volunteers.value;
         const description = form.description.value;
-        const postData = { title, thumbnail, category, deadline, location, volunteers, description, admin: { email, name: user?.displayName, photo: user?.photoURL } };
-
+        const suggestion = form.suggestion.value;
+        const volunteerData = { title, thumbnail, category, deadline, location, volunteers, description, suggestion, status: "Requested", admin: { email, name: user?.displayName, photo: user?.photoURL } };
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API}/add-volunteer`, postData);
+            const { data } = await axios.post(`${import.meta.env.VITE_API}/be-a-volunteer`, volunteerData);
             console.log(data);
-            toast.success('Add Post Successful.')
+            toast.success('Request Add Successful.')
         } catch (error) {
             console.log(error);
             toast.error(error.message);
@@ -83,7 +84,7 @@ const BeAVolunteer = () => {
                         </label>
                         <input
                             defaultValue={volunteer?.category}
-                            name='thumbnail'
+                            name='category'
                             className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 focus:ring-opacity-10 text-opacity-70 focus:outline-none focus:ring focus:ring-indigo-300'
                             type='text'
                             disabled={true}
@@ -170,9 +171,7 @@ const BeAVolunteer = () => {
                     </label>
                     <textarea defaultValue={volunteer?.description} disabled={true} name="description" className="textarea-bordered textarea block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 text-opacity-70 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Description"></textarea>
                 </div>
-
                 {/* Suggestion */}
-
                 <div className='mt-4'>
                     <label
                         className='block mb-2 text-sm font-medium text-gray-600 '
@@ -190,7 +189,7 @@ const BeAVolunteer = () => {
                         type='submit'
                         className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10'
                     >
-                        Be a Volunteer
+                        Request
                     </button>
                 </div>
             </form>

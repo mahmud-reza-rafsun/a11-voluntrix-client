@@ -4,10 +4,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import useAuth from "../provider/useAuth";
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
 
 const AddVolunteer = () => {
-    const [startDate, setStartDate] = useState(new Date())
     const { user } = useAuth();
+    const [startDate, setStartDate] = useState(new Date())
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,15 +23,16 @@ const AddVolunteer = () => {
         const volunteers = form.volunteers.value;
         const description = form.description.value;
         const postData = { title, thumbnail, category, deadline, location, volunteers, description, admin: { email, name: user?.displayName, photo: user?.photoURL } };
+        console.table(postData);
 
-        try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API}/add-volunteer`, postData);
-            console.log(data);
-            toast.success('Add Post Successful.')
-        } catch (error) {
-            console.log(error);
-            toast.error(error.message);
-        }
+        // try {
+        //     axios.post(`${import.meta.env.VITE_API}/add-volunteer`, postData);
+        //     toast.success('Add Post Successful.')
+        //     navigate('/');
+        // } catch (error) {
+        //     console.log(error);
+        //     toast.error(error.message);
+        // }
 
     }
     return (
@@ -68,13 +71,12 @@ const AddVolunteer = () => {
                     {/* Category */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600' htmlFor='loggingPassword'>
+                            className='block mb-2 text-sm font-medium text-gray-600'>
                             Category
                         </label>
                         <select
                             name="category"
-                            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 focus:ring-opacity-10 focus:outline-none focus:ring focus:ring-indigo-300"
-                        >
+                            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 focus:ring-opacity-10 focus:outline-none focus:ring focus:ring-indigo-300">
                             <option disabled selected value="">Select Category</option>
                             <option value="healthcare">Healthcare</option>
                             <option value="education">Education</option>

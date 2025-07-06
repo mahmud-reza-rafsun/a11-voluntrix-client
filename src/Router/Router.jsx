@@ -7,6 +7,7 @@ import AddVolunteer from "../pages/AddVolunteer";
 import AllVolunteerNeedPosts from "../pages/AllVolunteerNeedPosts";
 import VolunteerDetails from "../components/VolunteerDetails";
 import BeAVolunteer from "../components/BeAVolunteer";
+import ManageMyPost from "../pages/ManageMyPost";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: '/be-a-volunteer/:id',
                 element: <BeAVolunteer/>
+            },
+            {
+                path: '/manage-my-post',
+                element: <ManageMyPost/>
             }
         ]
     }
