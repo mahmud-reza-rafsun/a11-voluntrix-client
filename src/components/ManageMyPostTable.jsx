@@ -23,11 +23,8 @@ const ManageMyPostTable = ({ volutrix }) => {
                             ${category === 'Education' && 'text-green-500 bg-green-100/60'}
                             ${category === 'Social Service' && 'text-red-500 bg-red-100/60'}
                             ${category === 'Animal Welfare' && 'text-indigo-500 bg-indigo-100/60'}
-                            text-xs  rounded-full`}
-
-                    >
-                        {category}
-                    </p>
+                            text-xs  rounded-full`}>
+                    {category}</p>
                 </div>
             </td>
             <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
@@ -53,7 +50,7 @@ const ManageMyPostTable = ({ volutrix }) => {
                     </button>
 
                     <Link
-                        // to={`/update/${job?._id}`}
+                        to={`/update-volunteer/${_id}`}
                         className='text-gray-500 transition-colors duration-200 hover:text-green-500 focus:outline-none'
                     >
                         <svg

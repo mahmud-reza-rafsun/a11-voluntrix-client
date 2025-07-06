@@ -2,20 +2,23 @@ import { useEffect, useState } from "react";
 import useAuth from "../provider/useAuth";
 import axios from "axios";
 import ManageMyPostTable from "../components/ManageMyPostTable";
+import toast from "react-hot-toast";
 
 const ManageMyPost = () => {
     const { user } = useAuth();
     const [volunteer, setVolunteer] = useState([]);
     useEffect(() => {
         fetchAllData();
-    }, [])
+    }, [user])
     const fetchAllData = async () => {
-        try {
+       if(user?.email){
+         try {
             const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer/${user?.email}`);
             setVolunteer(data)
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
+       }
     }
     console.log(volunteer);
     return (
@@ -81,9 +84,9 @@ const ManageMyPost = () => {
                                 <tbody className='bg-white divide-y divide-gray-200 '>
                                     {/* load dynamic data */}
                                     {
-                                        volunteer.length > 0 ? volunteer.map((volutrix) => <ManageMyPostTable key={volutrix?._id} volutrix={volutrix} />) : <td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
+                                        volunteer.length > 0 ? volunteer.map((volutrix) => <ManageMyPostTable key={volutrix?._id} volutrix={volutrix} />) : <tr><td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
                                             No Post Found
-                                        </td>
+                                        </td></tr>
                                     }
                                 </tbody>
                             </table>
