@@ -1,48 +1,45 @@
-import { useEffect, useState } from "react";
-import useAuth from "../provider/useAuth";
 import axios from "axios";
-import ManageMyPostTable from "../components/ManageMyPostTable";
+import { useState, useEffect } from "react";
+import MyVolunteerRequestTable from "../components/MyVolunteerRequestTable";
 import toast from "react-hot-toast";
 
-const ManageMyPost = () => {
-    const { user } = useAuth();
+const MyVolunteerRequest = () => {
     const [volunteer, setVolunteer] = useState([]);
     useEffect(() => {
         fetchAllData();
-    }, [user])
+    }, [])
     const fetchAllData = async () => {
-        if (user?.email) {
-            try {
-                const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer/${user?.email}`);
-                setVolunteer(data)
-            } catch (error) {
-                toast.error(error.message);
-            }
-        }
-    }
-    // handleDelete
-    const handleDelete = async (id) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API}/delete-volunteer/${id}`);
-            toast.success('Delete Post');
-            fetchAllData();
+            const { data } = await axios.get(`${import.meta.env.VITE_API}/be-a-volunteer`);
+            setVolunteer(data)
         } catch (error) {
             toast.error(error.message);
         }
     }
-    // handle delete volunteer
-    const handleDeleteVolunteer = (id) => {
+
+    // handleCalcleVolunteer
+    const handleDelete = async (id) => {
+        try {
+            const { data } = await axios.delete(`${import.meta.env.VITE_API}/delete-my-volunteer/${id}`);
+            toast.success('Calcle Successful.')
+            fetchAllData();
+            console.log(data);
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+    const handleCalcleVolunteer = (id) => {
         toast((d) => (
-            <div className="text-center space-y-2">
-                <div>
-                    <p>Are you <b>Sure</b> !!!</p>
+            <div>
+                <div className="text-center">
+                    <p>Are You <b>Sure!!!</b></p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 mt-2">
                     <button onClick={() => {
                         toast.dismiss(d.id)
                         handleDelete(id)
                     }}
-                        className="btn-sm bg-red-400 text-white font-semibold rounded-md">Delete
+                        className="btn-sm px-4 bg-red-400 text-white font-semibold rounded-md">Ok
                     </button>
                     <button onClick={() => toast.dismiss(d.id)}
                         className="btn-sm bg-indigo-400 text-white font-semibold rounded-md"> Close
@@ -54,10 +51,10 @@ const ManageMyPost = () => {
     return (
         <section className='container px-4 mx-auto pt-12'>
             <div className='flex items-center gap-x-3'>
-                <h2 className='text-lg font-medium text-gray-800 '>Manage My Post</h2>
+                <h2 className='text-lg font-medium text-gray-800 '>My Volunteer Request</h2>
 
                 <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>
-                    {volunteer.length} Post
+                    {volunteer.length} Request
                 </span>
             </div>
 
@@ -88,15 +85,6 @@ const ManageMyPost = () => {
                                             scope='col'
                                             className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
                                         >
-                                            <button className='flex items-center gap-x-2'>
-                                                <span>No of Volunteer</span>
-                                            </button>
-                                        </th>
-
-                                        <th
-                                            scope='col'
-                                            className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
-                                        >
                                             Category
                                         </th>
                                         <th
@@ -114,8 +102,8 @@ const ManageMyPost = () => {
                                 <tbody className='bg-white divide-y divide-gray-200 '>
                                     {/* load dynamic data */}
                                     {
-                                        volunteer.length > 0 ? volunteer.map((volutrix) => <ManageMyPostTable key={volutrix?._id} volutrix={volutrix} handleDeleteVolunteer={handleDeleteVolunteer} />) : <tr><td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
-                                            No Post Found
+                                        volunteer.length > 0 ? volunteer.map((request) => <MyVolunteerRequestTable key={request?._id} request={request} handleCalcleVolunteer={handleCalcleVolunteer} />) : <tr><td colSpan="6" className='text-sm p-3 font-semibold text-gray-500'>
+                                            No Request Found
                                         </td></tr>
                                     }
                                 </tbody>
@@ -128,4 +116,4 @@ const ManageMyPost = () => {
     );
 };
 
-export default ManageMyPost;
+export default MyVolunteerRequest;

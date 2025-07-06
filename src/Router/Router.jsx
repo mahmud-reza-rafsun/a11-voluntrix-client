@@ -9,11 +9,14 @@ import VolunteerDetails from "../components/VolunteerDetails";
 import BeAVolunteer from "../components/BeAVolunteer";
 import ManageMyPost from "../pages/ManageMyPost";
 import UpdateVolunteer from "../components/UpdateVolunteer";
+import MyVolunteerRequest from "../pages/MyVolunteerRequest";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Root/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: '/',
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/update-volunteer/:id',
                 element: <UpdateVolunteer/>
+            },
+            {
+                path: '/my-volunteer-request',
+                element: <MyVolunteerRequest/>
             }
         ]
     }
