@@ -3,6 +3,10 @@ import Root from "../Layout/Root";
 import Home from "../pages/Home";
 import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Register";
+import AddVolunteer from "../pages/AddVolunteer";
+import AllVolunteerNeedPosts from "../pages/AllVolunteerNeedPosts";
+import VolunteerDetails from "../components/VolunteerDetails";
+import BeAVolunteer from "../components/BeAVolunteer";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +24,22 @@ const router = createBrowserRouter([
             {
                 path: '/registration',
                 element: <Registration/>
+            },
+            {
+                path: '/add-volunteer',
+                element: <AddVolunteer/>
+            },
+            {
+                path: '/all-volunteer-peed-posts',
+                element: <AllVolunteerNeedPosts/>
+            },
+            {
+                path :'/details/:id',
+                element: <VolunteerDetails/>
+            },
+            {
+                path: '/be-a-volunteer/:id',
+                element: <BeAVolunteer/>
             }
         ]
     }

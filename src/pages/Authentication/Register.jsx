@@ -139,6 +139,7 @@ const Registration = () => {
           </div>
 
           <form onSubmit={handleRegister}>
+            {/* name */}
             <div className='mt-4'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-600 '
@@ -154,6 +155,7 @@ const Registration = () => {
                 required
               />
             </div>
+            {/* photo URL */}
             <div className='mt-4'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-600 '
@@ -171,6 +173,7 @@ const Registration = () => {
                 required
               />
             </div>
+            {/* email */}
             <div className='mt-4'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-600 '
@@ -188,6 +191,7 @@ const Registration = () => {
                 required
               />
             </div>
+            {/* password */}
 
             <div className='mt-4 relative'>
               <div className='flex justify-between'>
