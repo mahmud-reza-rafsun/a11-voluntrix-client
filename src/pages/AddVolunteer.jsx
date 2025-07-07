@@ -36,7 +36,7 @@ const AddVolunteer = () => {
 
     }
     return (
-        <div className="shadow-xl max-w-lg mx-auto p-5 mt-4">
+        <div className="shadow-xl max-w-lg mx-auto p-5 mt-4 border rounded-md">
             <Helmet>
                 <title>Voluntrix | Add Voluntrix</title>
             </Helmet>
@@ -45,7 +45,7 @@ const AddVolunteer = () => {
                     {/* title */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '>
+                            className='block mb-2 text-sm font-medium '>
                             Post Title
                         </label>
                         <input
@@ -59,7 +59,7 @@ const AddVolunteer = () => {
                     {/* Thumbnail */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                            className='block mb-2 text-sm font-medium '
                         >
                             Thumbnail
                         </label>
@@ -73,7 +73,7 @@ const AddVolunteer = () => {
                     </div>
                     {/* Category */}
                     <div className='mt-4'>
-                        <label className='text-gray-700 ' htmlFor='category'>
+                        <label className=' ' htmlFor='category'>
                             Category
                         </label>
                         <select
@@ -89,7 +89,7 @@ const AddVolunteer = () => {
                     {/* deadline */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '>Deadline
+                            className='block mb-2 text-sm font-medium'>Deadline
                         </label>
                         <div className="">
                             <DatePicker
@@ -103,7 +103,7 @@ const AddVolunteer = () => {
                     {/* location */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                            className='block mb-2 text-sm font-medium '
                         >
                             Location
                         </label>
@@ -118,7 +118,7 @@ const AddVolunteer = () => {
                     <div className='mt-4 relative'>
                         <div className='flex justify-between'>
                             <label
-                                className='block mb-2 text-sm font-medium text-gray-600'>
+                                className='block mb-2 text-sm font-medium '>
                                 No. of Volunteers Needed
                             </label>
                         </div>
@@ -132,7 +132,7 @@ const AddVolunteer = () => {
                     {/* Logged in user name */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '> User Name
+                            className='block mb-2 text-sm font-medium '> User Name
                         </label>
                         <input
                             defaultValue={user?.displayName}
@@ -144,7 +144,7 @@ const AddVolunteer = () => {
                     {/* Logged in user email */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                        className='block mb-2 text-sm font-medium '
                         >
                             User Email
                         </label>
@@ -161,7 +161,7 @@ const AddVolunteer = () => {
                 {/* description */}
                 <div className='mt-4'>
                     <label
-                        className='block mb-2 text-sm font-medium text-gray-600 '
+                        className='block mb-2 text-sm font-medium '
                         htmlFor='name'> Description
                     </label>
                     <textarea name="description" className="textarea-bordered textarea block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Description"></textarea>

@@ -44,7 +44,7 @@ const BeAVolunteer = () => {
         }
     }
     return (
-        <div className="shadow-xl max-w-lg mx-auto p-5 mt-4">
+        <div className="shadow-xl max-w-lg mx-auto p-5 mt-4 border rounded-md">
             <Helmet>
                 <title>Voluntrix | Be a Volunteer</title>
             </Helmet>
@@ -53,7 +53,7 @@ const BeAVolunteer = () => {
                     {/* title */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '>
+                            className='block mb-2 text-sm font-medium '>
                             Post Title
                         </label>
                         <input
@@ -67,7 +67,7 @@ const BeAVolunteer = () => {
                     {/* Thumbnail */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                            className='block mb-2 text-sm font-medium  '
                         >
                             Thumbnail
                         </label>
@@ -82,7 +82,7 @@ const BeAVolunteer = () => {
                     {/* Category */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600' htmlFor='loggingPassword'>
+                            className='block mb-2 text-sm font-medium ' htmlFor='loggingPassword'>
                             Category
                         </label>
                         <input
@@ -96,7 +96,7 @@ const BeAVolunteer = () => {
                     {/* deadline */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '>Deadline
+                            className='block mb-2 text-sm font-medium '>Deadline
                         </label>
                         <input
                             defaultValue={volunteer?.deadline && format(new Date(volunteer?.deadline), 'P')}
@@ -109,7 +109,7 @@ const BeAVolunteer = () => {
                     {/* location */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                            className='block mb-2 text-sm font-medium '
                         >
                             Location
                         </label>
@@ -125,7 +125,7 @@ const BeAVolunteer = () => {
                     <div className='mt-4 relative'>
                         <div className='flex justify-between'>
                             <label
-                                className='block mb-2 text-sm font-medium text-gray-600'>
+                                className='block mb-2 text-sm font-medium'>
                                 No. of Volunteers Needed
                             </label>
                         </div>
@@ -140,7 +140,7 @@ const BeAVolunteer = () => {
                     {/* Logged in user name */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '> User Name
+                            className='block mb-2 text-sm font-medium'> User Name
                         </label>
                         <input
                             defaultValue={user?.displayName}
@@ -152,7 +152,7 @@ const BeAVolunteer = () => {
                     {/* Logged in user email */}
                     <div className='mt-4'>
                         <label
-                            className='block mb-2 text-sm font-medium text-gray-600 '
+                            className='block mb-2 text-sm font-medium'
                         >
                             User Email
                         </label>
@@ -169,7 +169,7 @@ const BeAVolunteer = () => {
                 {/* description */}
                 <div className='mt-4'>
                     <label
-                        className='block mb-2 text-sm font-medium text-gray-600 '
+                        className='block mb-2 text-sm font-medium'
                         htmlFor='name'> Description
                     </label>
                     <textarea defaultValue={volunteer?.description} disabled={true} name="description" className="textarea-bordered textarea block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 text-opacity-70 focus:ring-opacity-10  focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Description"></textarea>
@@ -177,7 +177,7 @@ const BeAVolunteer = () => {
                 {/* Suggestion */}
                 <div className='mt-4'>
                     <label
-                        className='block mb-2 text-sm font-medium text-gray-600 '
+                        className='block mb-2 text-sm font-medium'
                         htmlFor='name'> Suggestion
                     </label>
                     <textarea name="suggestion" className="textarea-bordered textarea block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-indigo-400 focus:ring-opacity-10 focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Description"></textarea>
@@ -190,7 +190,7 @@ const BeAVolunteer = () => {
                 <div className='mt-5'>
                     <button
                         type='submit'
-                        className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10'
+                        className='w-full px-6 py-3 text-sm font-medium tracking-wide capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10'
                     >
                         Request
                     </button>

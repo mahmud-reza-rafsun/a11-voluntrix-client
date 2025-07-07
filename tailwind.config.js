@@ -7,6 +7,7 @@ export default {
         open: "'Open Sans', sans-serif",
       },
     },
+    darkMode: 'class'
   },
   plugins: [require('daisyui')],
 }

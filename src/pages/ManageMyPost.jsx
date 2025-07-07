@@ -58,7 +58,7 @@ const ManageMyPost = () => {
                 <title>Voluntrix | Manage My Post</title>
             </Helmet>
             <div className='flex items-center gap-x-3'>
-                <h2 className='text-lg font-medium text-gray-800 '>Manage My Post</h2>
+                <h2 className='text-lg font-medium'>Manage My Post</h2>
 
                 <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>
                     {volunteer.length} Post

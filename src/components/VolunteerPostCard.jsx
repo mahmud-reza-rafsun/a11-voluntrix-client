@@ -7,7 +7,7 @@ const VolunteerPostCard = ({ voluntrix }) => {
             <figure>
                 <img
                     src={thumbnail}
-                    className="h-44 w-full object-cover rounded-md shadow-xl shadow-indigo-200"
+                    className="h-44 w-full object-cover rounded-md"
                     alt="Shoes" />
             </figure>
             <div className="space-y-1 mt-8">
