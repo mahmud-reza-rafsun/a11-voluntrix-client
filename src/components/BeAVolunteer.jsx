@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../provider/useAuth";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from "date-fns";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 
 const BeAVolunteer = () => {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const { id } = useParams();
     const [volunteer, setVolunteer] = useState({});
@@ -39,6 +40,7 @@ const BeAVolunteer = () => {
         try {
             await axios.post(`${import.meta.env.VITE_API}/be-a-volunteer`, volunteerData);
             toast.success('Request Add Successful.')
+            navigate('/my-volunteer-request')
         } catch (error) {
             toast.error(error.message);
         }

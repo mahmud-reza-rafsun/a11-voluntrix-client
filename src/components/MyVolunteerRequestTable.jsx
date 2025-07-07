@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-const MyVolunteerRequestTable = ({ request, handleCalcleVolunteer }) => {
+const MyVolunteerRequestTable = ({ request, handleCancelVolunteer }) => {
     const { _id, title, category, description, deadline, volunteers } = request || {};
     return (
         <tr>
@@ -28,7 +28,7 @@ const MyVolunteerRequestTable = ({ request, handleCalcleVolunteer }) => {
             </td>
             <td className='px-4 py-4 text-sm whitespace-nowrap'>
                 <div className='flex items-center justify-between'>
-                    <button onClick={() => handleCalcleVolunteer(_id)} className="flex gap-2 justify-between items-center border-red-400 bg-red-400 hover:bg-red-500 transition-colors duration-500  text-white px-3 py-2 rounded-md">
+                    <button onClick={() => handleCancelVolunteer(_id)} className="flex gap-2 justify-between items-center border-red-400 bg-red-400 hover:bg-red-500 transition-colors duration-500  text-white px-3 py-2 rounded-md">
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'

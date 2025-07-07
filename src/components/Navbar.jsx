@@ -38,7 +38,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     <div className="flex gap-3 items-center">
-                        <div className="mt-2">
+                        <div className="mt-1">
                             {/* dark toggle */}
                             <DarkModeToggle />
                         </div>
