@@ -9,9 +9,8 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         signOutUser()
-            .then(result => {
+            .then(() => {
                 toast.success('Sign Out Successfull');
-                console.log(result);
             })
             .catch(error => {
                 toast.error(error.message);
@@ -60,20 +59,20 @@ const Navbar = () => {
                                         }
                                     </ul>
                                 </div>
-                                <div>
+                                <div className="hidden lg:flex">
                                     <button
                                         onClick={handleSignOut}
                                         className="px-4 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-gray-300 font-semibold focus:ring-opacity-10">Log Out</button>
                                 </div>
                             </div>
                             :
-                            <>
+                            <div className="hidden lg:flex">
                                 <Link to="/login" className="px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10">Login</Link>
-                            </>
+                            </div>
                     }
                     {/* menu */}
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0} role="button" className="px-3 py-2 text-sm font-medium text-white bg-indigo-500 rounded-lg lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -91,6 +90,17 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content absolute right-0 bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {links}
+                            <div className="mt-4 pb-4">
+                                {
+                                    user ? <div className="">
+                                        <button
+                                            onClick={handleSignOut}
+                                            className="px-4 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-gray-300 font-semibold focus:ring-opacity-10">Log Out</button>
+                                    </div> : <div>
+                                        <Link to="/login" className="px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10">Login</Link>
+                                    </div>
+                                }
+                            </div>
                         </ul>
                     </div>
                 </div>

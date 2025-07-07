@@ -3,6 +3,7 @@ import useAuth from "../provider/useAuth";
 import axios from "axios";
 import ManageMyPostTable from "../components/ManageMyPostTable";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageMyPost = () => {
     const { user } = useAuth();
@@ -52,7 +53,10 @@ const ManageMyPost = () => {
         ))
     }
     return (
-        <section className='container px-4 mx-auto pt-12'>
+        <section className='container px-4 mx-auto pt-4 lg:pt-12'>
+            <Helmet>
+                <title>Voluntrix | Manage My Post</title>
+            </Helmet>
             <div className='flex items-center gap-x-3'>
                 <h2 className='text-lg font-medium text-gray-800 '>Manage My Post</h2>
 

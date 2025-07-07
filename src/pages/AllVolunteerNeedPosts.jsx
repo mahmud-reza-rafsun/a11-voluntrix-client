@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import VolunteerPostCard from "../components/VolunteerPostCard";
+import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const AllVolunteerNeedPosts = () => {
     const [volunteer, setVolunteer] = useState([]);
@@ -13,13 +15,15 @@ const AllVolunteerNeedPosts = () => {
                 const { data } = await axios.get(`${import.meta.env.VITE_API}/all-volunteer?search=${search}`);
                 setVolunteer(data)
             } catch (error) {
-                console.log(error);
+                toast.error(error);
             }
         }
-        console.log(search);
     return (
         <div>
             <div className='flex flex-col md:flex-row justify-center items-center gap-5'>
+                <Helmet>
+                    <title>Voluntrix | All Volunteer</title>
+                </Helmet>
                 <div className='flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-30 focus-within:border-gray-400 focus-within:ring-gray-400'>
                     <input
                     onChange={(e) => setSearch(e.target.value)}

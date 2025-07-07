@@ -41,9 +41,7 @@ const UpdateVolunteer = () => {
             const {data} = axios.put(`${import.meta.env.VITE_API}/update-volunteer/${id}`, updateData);
             toast.success('Update Successful.')
             navigate('/manage-my-post');
-            console.log(data);
         } catch (error) {
-            console.log(error);
             toast.error(error.message);
         }
     }

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import MyVolunteerRequestTable from "../components/MyVolunteerRequestTable";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const MyVolunteerRequest = () => {
     const [volunteer, setVolunteer] = useState([]);
@@ -23,7 +24,6 @@ const MyVolunteerRequest = () => {
             const { data } = await axios.delete(`${import.meta.env.VITE_API}/delete-my-volunteer/${id}`);
             toast.success('Calcle Successful.')
             fetchAllData();
-            console.log(data);
         } catch (error) {
             toast.error(error.message)
         }
@@ -49,8 +49,11 @@ const MyVolunteerRequest = () => {
         ))
     }
     return (
-        <section className='container px-4 mx-auto pt-12'>
-            <div className='flex items-center gap-x-3'>
+        <section className='container px-4 mx-auto pt-4 lg:pt-12'>
+            <Helmet>
+                <title>Voluntrix | My Volunteer Request</title>
+            </Helmet>
+            <div className='flex flex-col lg:flex-row items-center gap-x-3'>
                 <h2 className='text-lg font-medium text-gray-800 '>My Volunteer Request</h2>
 
                 <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>

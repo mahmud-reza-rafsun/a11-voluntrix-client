@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import VolunteerPostCard from "./VolunteerPostCard";
+import toast from "react-hot-toast";
 
 const VounteerPost = () => {
     const [volunteer, setVolunteer] = useState([]);
@@ -12,11 +13,9 @@ const VounteerPost = () => {
             const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer`);
             setVolunteer(data)
         } catch (error) {
-            console.log(error);
+            toast.error(error);
         }
     }
-
-    console.log(volunteer);
     return (
         <div>
             <div className="text-center py-4 lg:py-7">

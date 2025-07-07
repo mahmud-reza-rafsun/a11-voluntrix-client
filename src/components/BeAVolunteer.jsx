@@ -5,6 +5,7 @@ import useAuth from "../provider/useAuth";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const BeAVolunteer = () => {
     const { user } = useAuth();
@@ -18,7 +19,7 @@ const BeAVolunteer = () => {
             const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer-details/${id}`);
             setVolunteer(data)
         } catch (error) {
-            console.log(error);
+            toast.error(error);
         }
     }
     const handleBeAVolunteer = async (e) => {
@@ -34,17 +35,19 @@ const BeAVolunteer = () => {
         const description = form.description.value;
         const suggestion = form.suggestion.value;
         const volunteerData = { title, thumbnail, category, deadline, location, volunteers, description, suggestion, status: "Requested", admin: { email, name: user?.displayName, photo: user?.photoURL } };
+
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API}/be-a-volunteer`, volunteerData);
-            console.log(data);
+            await axios.post(`${import.meta.env.VITE_API}/be-a-volunteer`, volunteerData);
             toast.success('Request Add Successful.')
         } catch (error) {
-            console.log(error);
             toast.error(error.message);
         }
     }
     return (
         <div className="shadow-xl max-w-lg mx-auto p-5 mt-4">
+            <Helmet>
+                <title>Voluntrix | Be a Volunteer</title>
+            </Helmet>
             <form onSubmit={handleBeAVolunteer}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* title */}

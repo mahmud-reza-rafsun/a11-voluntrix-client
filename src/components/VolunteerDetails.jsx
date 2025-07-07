@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
 
 const VolunteerDetails = () => {
@@ -13,12 +15,16 @@ const VolunteerDetails = () => {
             const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer-details/${id}`);
             setVolunteer(data)
         } catch (error) {
-            console.log(error);
+            toast.error(error.message);
         }
     }
-    console.log(volunteer);
     return (
-        <div
+        <div>
+            <Helmet>
+                <title>Voluntrix | {`${volunteer?.title}`}</title>
+            </Helmet>
+            <div
+        
             className="hero min-h-[80vh]"
             style={{
                 backgroundImage: `url(${volunteer?.thumbnail})`,
@@ -48,6 +54,7 @@ const VolunteerDetails = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

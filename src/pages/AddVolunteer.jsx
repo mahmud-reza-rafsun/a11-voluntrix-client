@@ -5,6 +5,7 @@ import useAuth from "../provider/useAuth";
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddVolunteer = () => {
     const { user } = useAuth();
@@ -30,13 +31,15 @@ const AddVolunteer = () => {
             toast.success('Add Post Successful.')
             navigate('/manage-my-post');
         } catch (error) {
-            console.log(error);
             toast.error(error.message);
         }
 
     }
     return (
         <div className="shadow-xl max-w-lg mx-auto p-5 mt-4">
+            <Helmet>
+                <title>Voluntrix | Add Voluntrix</title>
+            </Helmet>
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* title */}

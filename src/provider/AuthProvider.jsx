@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import axios from 'axios'
 import {
     createUserWithEmailAndPassword,
     GithubAuthProvider,
@@ -51,10 +52,15 @@ const AuthProvider = ({ children }) => {
     }
     // Observer
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+        const unSubscribe = onAuthStateChanged(auth, async currentUser => {
+            if(user?.email){
+                setUser(currentUser);
+                await axios.post(`${import.meta.env.VITE_APT}/jwt`, {email: user?.email}, {withCredentials: true})
+            }else{
+                setUser(currentUser)
+                const {data} = await axios.get(`${import.meta.env.VITE_APT}/logout`, {withCredentials: true})
+            }
             setLoading(false);
-            console.log(currentUser);
         })
         return () => {
             unSubscribe();
