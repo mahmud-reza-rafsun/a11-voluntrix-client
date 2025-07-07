@@ -15,7 +15,7 @@ const AllVolunteerNeedPosts = () => {
                 const { data } = await axios.get(`${import.meta.env.VITE_API}/all-volunteer?search=${search}`);
                 setVolunteer(data)
             } catch (error) {
-                toast.error(error);
+                toast.error(error?.message);
             }
         }
     return (
