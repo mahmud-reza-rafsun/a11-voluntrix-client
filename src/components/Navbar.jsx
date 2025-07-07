@@ -45,7 +45,7 @@ const Navbar = () => {
                         <div>
                             {
                                 user ?
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex items-center mr-3 gap-3">
                                         <div className="dropdown dropdown-end tooltip tooltip-left" data-tip={user?.displayName}>
                                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                                 <div className="w-10 rounded-full">
@@ -99,12 +99,12 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content absolute right-0 bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {links}
-                            <div className="mt-4 pb-4">
+                            <div className="mt-2 pb-2">
                                 {
                                     user ? <div className="">
                                         <button
                                             onClick={handleSignOut}
-                                            className="px-4 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-gray-300 font-semibold focus:ring-opacity-10">Log Out</button>
+                                            className="px-4 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-gray-300 font-semibold focus:ring-opacity-10">Log Out</button>
                                     </div> : <div>
                                         <Link to="/login" className="px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-10">Login</Link>
                                     </div>

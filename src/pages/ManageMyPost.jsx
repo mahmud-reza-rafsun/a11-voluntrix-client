@@ -71,7 +71,7 @@ const ManageMyPost = () => {
                         {volunteer.length} Post
                     </span>
                 </div>
-                <div>
+                <div className="mt-4">
                     <button onClick={toggleView} className="mb-4 p-2  bg-blue-600 text-white rounded flex items-center gap-2">
                         {view === 'table' ? <FaThList /> : <FaTh />}
                     </button>
