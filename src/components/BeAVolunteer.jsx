@@ -20,7 +20,7 @@ const BeAVolunteer = () => {
             const { data } = await axios.get(`${import.meta.env.VITE_API}/volunteer-details/${id}`);
             setVolunteer(data)
         } catch (error) {
-            toast.error(error);
+            toast.error(error?.message);
         }
     }
     const handleBeAVolunteer = async (e) => {
@@ -42,7 +42,7 @@ const BeAVolunteer = () => {
             toast.success('Request Add Successful.')
             navigate('/my-volunteer-request')
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error?.message);
         }
     }
     return (
