@@ -12,12 +12,12 @@ const VolunteerPostCard = ({ voluntrix }) => {
             </figure>
             <div className="space-y-1 mt-8">
                 <h2 className="font-semibold">{title}</h2>
-                <p className="font-normal text-sm">Category: {category}</p>
-                <p className="font-normal text-sm">Deadline: {deadline}</p>
-                <p className="font-normal text-sm">Location: {location}</p>
-                <p className="font-normal text-sm">Volunteers: {volunteers}</p>
+                <div className="font-normal text-sm">Category: {category}</div>
+                <div className="font-normal text-sm">Deadline: {deadline}</div>
+                <div className="font-normal text-sm">Location: {location}</div>
+                <div className="font-normal text-sm">Volunteers: {volunteers}</div>
                 <hr />
-                <p className="font-normal text-sm">Description: {description.substring(0, 98)}...</p>
+                <div className="font-normal text-sm">Description: {description.substring(0, 98)}...</div>
                 {/* details buton */}
                 <div className=''>
                     <Link to={`/details/${_id}`}>

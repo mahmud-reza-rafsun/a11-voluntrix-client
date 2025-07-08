@@ -3,7 +3,6 @@ import logo from '../assets/images/logo.png'
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext)
@@ -38,10 +37,6 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     <div className="flex gap-3 items-center">
-                        <div className="mt-1">
-                            {/* dark toggle */}
-                            <DarkModeToggle />
-                        </div>
                         <div>
                             {
                                 user ?
